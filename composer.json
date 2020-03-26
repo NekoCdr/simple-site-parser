@@ -12,6 +12,11 @@
             "email": "intro1994@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "SSP\\": "app/"
+        }
+    },
     "config": {
         "platform": {
             "php": "7.4"
