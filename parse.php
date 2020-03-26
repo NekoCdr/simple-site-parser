@@ -2,6 +2,7 @@
 
 use SSP\CliWrapper;
 use SSP\HTMLDocument;
+use SSP\UrlHandler;
 
 define('ROOT_PATH', __DIR__);
 
@@ -16,8 +17,9 @@ try {
 	 */
 	$options = CliWrapper::getOptions('r:n:', ['url:'], ['url'], ['r' => 10, 'n' => 0]);
 
+	$URL = new UrlHandler($options['url']);
 	$doc = new HTMLDocument();
-	if (!$doc->loadCurlDocument($options['url'], $options['r'])) {
+	if (!$doc->loadCurlDocument($URL->url, $options['r'])) {
 		if ($doc->http_code == 308 && $doc->redirect_count == $doc->max_redirects)
 			throw new Exception("Document wasn't load. Too many redirects.");
 		else
