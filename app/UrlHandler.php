@@ -65,7 +65,7 @@ class UrlHandler
 			$parsed_url = $URL['scheme'] . '://' . $URL['host'];
 			if (!empty($URL['path']))
 				$parsed_url .= $URL['path'];
-		} elseif (!empty($URL['path']) && preg_match("/^([\w\.]+)\.([a-z]{2,6}\.?)(\/[\w\.]*)*\/?$/", $URL['path']))
+		} elseif (!empty($URL['path']) && preg_match("/^([\w\.]+)\.([a-z]{2,6}\.?)(\/.*)*\/?$/", $URL['path']))
 			$parsed_url = $URL['scheme'] . '://' . $URL['path'];
 		else
 			return null;
@@ -77,5 +77,41 @@ class UrlHandler
 			return null;
 
 		return $parsed_url;
+	}
+
+	/**
+	 * @param string $relative_url
+	 * @return string|null
+	 */
+	public function getAbsoluteUrl(string $relative_url): ?string
+	{
+		$parsed_url = self::parseUrl($relative_url);
+
+		if (filter_var($parsed_url, FILTER_VALIDATE_URL))
+			return $parsed_url;
+
+		if ($relative_url[0] == '/') {
+			$parsed_url = self::parseUrl($this->url_components['host'].$relative_url);
+
+			if (filter_var($parsed_url, FILTER_VALIDATE_URL))
+				return $parsed_url;
+		}
+
+		return null;
+	}
+
+	/**
+	 * @param array $relative_urls
+	 * @return array
+	 */
+	public function getAbsoluteUrls(array $relative_urls): array
+	{
+		$absolute_urls = [];
+		foreach ($relative_urls as $url) {
+			$absolute_url = $this->getAbsoluteUrl($url);
+			if (!empty($absolute_url))
+				$absolute_urls[] = $absolute_url;
+		}
+		return $absolute_urls;
 	}
 }
