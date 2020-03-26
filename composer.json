@@ -3,7 +3,9 @@
     "description": "This is a simple site parser. It based on DOMDocument and extend it for requirements of my test job",
     "type": "project",
     "require": {
-        "php": "^7.4"
+        "php": "^7.4",
+        "ext-dom": "*",
+        "ext-curl": "*"
     },
     "license": "MIT",
     "authors": [
