@@ -64,4 +64,24 @@ class HTMLDocument extends \DOMDocument
 		} else
 			return false;
 	}
+
+	/**
+	 * @param string $tag_name
+	 * @param string $attribute_name
+	 * @return array
+	 */
+	public function getAttributeByTagName(string $tag_name, string $attribute_name): array
+	{
+		/** @var $dom_element \DOMElement */
+
+		$result_list = [];
+
+		$dom_elements = $this->getElementsByTagName($tag_name);
+		foreach ($dom_elements as $dom_element) {
+			$attribute_value = $dom_element->getAttribute($attribute_name);
+			if (!empty($attribute_value))
+				$result_list[] = $attribute_value;
+		}
+		return $result_list;
+	}
 }
