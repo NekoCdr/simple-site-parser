@@ -70,7 +70,7 @@ class HTMLDocument extends \DOMDocument
 	 * @param string $attribute_name
 	 * @return array
 	 */
-	public function getAttributeByTagName(string $tag_name, string $attribute_name): array
+	public function getAttributesByTagName(string $tag_name, string $attribute_name): array
 	{
 		/** @var $dom_element \DOMElement */
 
