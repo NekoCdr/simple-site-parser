@@ -1,0 +1,21 @@
+{
+    "name": "intro94/simple-site-parser",
+    "description": "This is a simple site parser. It based on DOMDocument and extend it for requirements of my test job",
+    "type": "project",
+    "require": {
+        "php": "^7.4"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yuri Istomin",
+            "email": "intro1994@gmail.com"
+        }
+    ],
+    "config": {
+        "platform": {
+            "php": "7.4"
+        }
+    },
+    "minimum-stability": "stable"
+}
