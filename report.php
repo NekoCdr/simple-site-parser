@@ -17,6 +17,9 @@ try {
 	 */
 	$options = CliWrapper::getOptions('p:', ['domain:'], ['domain'], ['p' => 0]);
 
+	if ($options['p'] < 0)
+		throw new Exception('Max records option must be a natural number');
+
 	$URL = new UrlHandler($options['domain']);
 	$report = ReportFS::loadReport($URL->url_components['host']);
 	if (!ReportPrint::printReport($report, $options['p']))

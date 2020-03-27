@@ -55,7 +55,7 @@ class ReportGenerator
 		$report[$document->document_url]['Image'] = self::prepareClearList($image_links);
 		$report[$document->document_url]['Link'] = self::prepareClearList($a_links);
 
-		if ($nesting_level_max != self::INFINITY_NESTING_LEVEL && $nesting_level_current == $nesting_level_max)
+		if ($nesting_level_max != self::INFINITY_NESTING_LEVEL && $nesting_level_current >= $nesting_level_max)
 			return;
 		else {
 			foreach ($a_links as $link) {

@@ -8,7 +8,7 @@ class ReportPrint
 {
 	public const INFINITY_PRINT = 0;
 
-	public static function printReport(array $report, int $max_records): bool
+	public static function printReport(array $report, int $max_records = self::INFINITY_PRINT): bool
 	{
 		$report = self::reformatReport($report);
 		$report_txt = '';

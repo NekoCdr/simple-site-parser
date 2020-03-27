@@ -22,6 +22,12 @@ try {
 	 */
 	$options = CliWrapper::getOptions('r:n:', ['url:'], ['url'], ['r' => 10, 'n' => 0]);
 
+	if ($options['n'] < 0)
+		throw new Exception('Nesting level must be a natural number');
+
+	if ($options['r'] < 0)
+		throw new Exception('Max redirects option must be a natural number');
+
 	$URL = new UrlHandler($options['url']);
 	$doc = new HTMLDocument();
 	if (!$doc->loadCurlDocument($URL->url, $options['r'])) {
