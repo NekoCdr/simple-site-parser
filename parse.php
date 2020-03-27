@@ -2,6 +2,8 @@
 
 use SSP\CliWrapper;
 use SSP\HTMLDocument;
+use SSP\Report\ReportGenerator;
+use SSP\Report\ReportFS;
 use SSP\UrlHandler;
 
 define('ROOT_PATH', __DIR__);
@@ -27,6 +29,11 @@ try {
 		else
 			throw new Exception("Document wasn't load. HTTP code: {$doc->http_code}");
 	}
+	$report = ReportGenerator::run($doc, $options['n']);
+	$report_path = ReportFS::saveReport($report, $URL->url_components['host']);
+
+	echo 'Report saved to: ', $report_path, PHP_EOL;
+	echo 'Libxml errors: ', count(libxml_get_errors()), PHP_EOL;
 } catch (Exception $e) {
 	echo $e->getMessage(), PHP_EOL;
 	exit();
