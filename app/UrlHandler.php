@@ -94,7 +94,7 @@ class UrlHandler
 			return $parsed_url;
 
 		if ($relative_url[0] == '/') {
-			$parsed_url = self::parseUrl($this->url_components['host'].$relative_url);
+			$parsed_url = self::parseUrl($this->url_components['scheme'] . '://' . $this->url_components['host'] . $relative_url);
 
 			if (filter_var($parsed_url, FILTER_VALIDATE_URL))
 				return $parsed_url;
