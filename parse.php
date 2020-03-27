@@ -1,6 +1,7 @@
 <?php
 
 use SSP\CliWrapper;
+use SSP\ErrorHandler;
 use SSP\HTMLDocument;
 use SSP\Report\ReportGenerator;
 use SSP\Report\ReportFS;
@@ -33,7 +34,9 @@ try {
 	$report_path = ReportFS::saveReport($report, $URL->url_components['host']);
 
 	echo 'Report saved to: ', $report_path, PHP_EOL;
-	echo 'Libxml errors: ', count(libxml_get_errors()), PHP_EOL;
+
+	if (!empty(libxml_get_errors()))
+		echo ErrorHandler::saveLibxmlLogs(libxml_get_errors());
 } catch (Exception $e) {
 	echo $e->getMessage(), PHP_EOL;
 	exit();
