@@ -73,6 +73,9 @@ class UrlHandler
 		if ($parsed_url && !empty($URL['query']))
 			$parsed_url .= '?' . $URL['query'];
 
+		if ($parsed_url && !empty($URL['fragment']))
+			$parsed_url .= '#' . $URL['fragment'];
+
 		if (!$parsed_url)
 			return null;
 
