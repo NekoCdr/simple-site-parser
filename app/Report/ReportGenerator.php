@@ -52,10 +52,8 @@ class ReportGenerator
 		$a_links = self::getALinksFromDocument($document);
 
 		$report[$document->document_url] = [];
-
-		foreach ($image_links as $link)
-			if (!in_array($link, $report[$document->document_url]))
-				$report[$document->document_url][] = $link;
+		$report[$document->document_url]['Image'] = self::prepareClearList($image_links);
+		$report[$document->document_url]['Links'] = self::prepareClearList($a_links);
 
 		if ($nesting_level_max != self::INFINITY_NESTING_LEVEL && $nesting_level_current == $nesting_level_max)
 			return;
@@ -69,6 +67,21 @@ class ReportGenerator
 				}
 			}
 		}
+	}
+
+	/**
+	 * @param array $list
+	 * @return array
+	 */
+	protected static function prepareClearList(array $list): array
+	{
+		$clear_list = [];
+		foreach ($list as $item) {
+			if (!in_array($item, $clear_list)) {
+				$clear_list[] = $item;
+			}
+		}
+		return $clear_list;
 	}
 
 	/**
