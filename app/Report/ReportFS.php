@@ -68,4 +68,25 @@ class ReportFS
 
 		return $filepath;
 	}
+
+	/**
+	 * @param string $host_name
+	 * @return array
+	 * @throws \Exception
+	 */
+	public static function loadReport(string $host_name): array
+	{
+		$filename = $host_name.'.csv';
+		$filepath = self::PATH_TO_REPORTS.'/'.$filename;
+
+		if (!file_exists($filepath))
+			throw new \Exception('Report for this domain doesn\'t exist!');
+
+		$report = file($filepath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+
+		if (!$report)
+			throw new \Exception('Report wasn\'t load!');
+
+		return $report;
+	}
 }
