@@ -4,6 +4,8 @@
 namespace SSP\Report;
 
 
+use SSP\CliWrapper;
+
 /**
  * Class ReportSave
  * @package SSP\Report
@@ -60,7 +62,7 @@ class ReportFS
 		$filepath = self::PATH_TO_REPORTS.'/'.$filename;
 
 		if (file_exists($filepath))
-			echo 'File ' . $filename . ' is exist, it will be overwritten.', PHP_EOL;
+			echo 'File ' . CliWrapper::CL_YELLOW . $filename . CliWrapper::CL_DEFAULT . ' is exist, it will be overwritten.', PHP_EOL;
 
 		$file = fopen($filepath, 'w+');
 		fwrite($file, $report_txt);

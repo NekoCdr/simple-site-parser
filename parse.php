@@ -33,7 +33,7 @@ try {
 	$report = ReportGenerator::run($doc, $options['n']);
 	$report_path = ReportFS::saveReport($report, $URL->url_components['host']);
 
-	echo 'Report saved to: ', $report_path, PHP_EOL;
+	echo 'Report saved to: ' . CliWrapper::CL_YELLOW . $report_path . CliWrapper::CL_DEFAULT, PHP_EOL;
 
 	if (!empty(libxml_get_errors()))
 		echo ErrorHandler::saveLibxmlLogs(libxml_get_errors());
